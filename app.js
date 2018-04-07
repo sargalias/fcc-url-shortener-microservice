@@ -12,7 +12,7 @@ const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-const DOMAIN = 'http://localhost:8080';
+const DOMAIN = 'http://localhost:8080/';
 
 
 // Run Express
@@ -35,14 +35,13 @@ app.get('/api/new/:url(*)', (req, res) => {
                 return res.send(err);
             }
             if (data !== null) {
-                let results = {original_url: data.originalUrl, shortened_url: data.shortenedUrl};
-                return res.json(results);
+                return res.json(parseUrlData(data));
             }
             UrlModel.create({originalUrl: req.params.url}, (err, data) => {
                 if (err) {
                     return res.send(err);
                 }
-                return res.json(data);
+                return res.json(parseUrlData(data));
             });
         });
     } else {
@@ -56,3 +55,15 @@ const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log('Server started on port ' + port);
 });
+
+
+// Utility
+function prependDomainUrl(url) {
+    return DOMAIN + url;
+}
+
+function parseUrlData(data) {
+    let shortenedUrl = prependDomainUrl(data.shortenedUrl);
+    let originalUrl = data.originalUrl;
+    return {shortenedUrl: shortenedUrl, originalUrl: originalUrl};
+}
