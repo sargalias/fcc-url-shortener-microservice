@@ -15,6 +15,7 @@ mongoose.Promise = global.Promise;
 db.on('error', console.error.bind(console, 'connection error:'));
 
 const DOMAIN = 'http://localhost:8080/';
+const APIHOME = 'api/';
 
 
 // Run Express
@@ -38,7 +39,7 @@ app.get('/api/new/:url(*)', (req, res) => {
             },
             function(data, callback) {
                 if (data !== null) {
-                    return res.json(urlHelpers.parseUrlData(DOMAIN, data));
+                    return res.json(urlHelpers.parseUrlData(DOMAIN, data, APIHOME));
                 }
                 UrlModel.create({originalUrl: req.params.url}, callback);
             }
@@ -46,11 +47,25 @@ app.get('/api/new/:url(*)', (req, res) => {
             if (err) {
                 return res.send(err);
             }
-            return res.json(urlHelpers.parseUrlData(DOMAIN, data));
+            return res.json(urlHelpers.parseUrlData(DOMAIN, data, APIHOME));
         });
     } else {
         return res.json({error: "Wrong URL format. Please make sure you have a valid protocol and real site."});
     }
+});
+
+
+app.get('/api/:shortenedUrlCode', (req, res) => {
+    UrlModel.findOne({shortenedUrl: req.params.shortenedUrlCode}, (err, data) => {
+        if (err) {
+            return res.send(err);
+        }
+        if (data === null) {
+            let err = {msg: 'The url was not found in the database.', statusCode: 404};
+            return res.json(err);
+        }
+        return res.redirect(data.originalUrl);
+    });
 });
 
 
