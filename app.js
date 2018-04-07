@@ -62,7 +62,7 @@ app.get('/api/:shortenedUrlCode', (req, res) => {
             let err = {msg: 'The url was not found in the database.', statusCode: 404};
             return res.json(err);
         }
-        return res.redirect(data.originalUrl);
+        return res.redirect(301, data.originalUrl);
     });
 });
 
