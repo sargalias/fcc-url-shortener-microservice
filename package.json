@@ -1,0 +1,19 @@
+{
+  "name": "fcc-url-shortener-microservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sargalias/fcc-url-shortener-microservice.git"
+  },
+  "author": "Spyros Argalias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sargalias/fcc-url-shortener-microservice/issues"
+  },
+  "homepage": "https://github.com/sargalias/fcc-url-shortener-microservice#readme"
+}
