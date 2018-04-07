@@ -16,21 +16,30 @@
         <h1>URL Shortener Microservice</h1>
     </div>
     <div class="alert alert-info">
-        <h3>User story:</h3>
+        <h2>User story</h2>
         <ol>
             <li>I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.</li>
             <li>If I pass an invalid URL that doesn't follow the valid http://www.example.com format, the JSON response will contain an error instead.</li>
             <li>When I visit that shortened URL, it will redirect me to my original link.</li>
         </ol>
+        <h2>Notes</h2>
+        <p>Of course, the URL isn't actually shortened as it is prepended with a very long domain name.</p>
+        <p>But service works, it creates a short code which it uses to redirect to the original URL.</p>
     </div>
 
     <div class="alert alert-warning">
-        <h3>Example usage:</h3>
+        <h2>Instructions</h2>
+        <p class="text-dark">Visit the domain (https://sargalias-url-shortener-ms.herokuapp.com/api/new/YOUR_URL_HERE) replacing YOUR_URL_HERE with a valid URL, including the protocol (such as http://).</p>
+        <p>You'll be shown a <strong>shortenedURL</strong>. Visiting it will redirect to your original link.</p>
     </div>
 
     <div class="alert">
-        <h3>Example output:</h3>
+        <h2>Example input</h2>
+        <p><code><a class="text-danger" href="/api/new/https://google.com">https://sargalias-url-shortener-ms.herokuapp.com/api/new/https://google.com</a></code></p>
+        <h2>Example output</h2>
         <p><code class="text-dark">{<br>
+            &emsp;"shortenedUrl": <a target="_blank" href="https://sargalias-url-shortener-ms.herokuapp.com/api/Hk69kC8oM">"https://sargalias-url-shortener-ms.herokuapp.com/api/Hk69kC8oM"</a>,<br>
+            &emsp;"originalUrl": <a href="https://google.com" target="_blank">"https://google.com"</a><br>
             }</code></p>
     </div>
 </div>
