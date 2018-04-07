@@ -1,1 +1,1 @@
-module.exports = {DATABASE_URI: process.env.MONGO_URI};
+module.exports = {DATABASE_URI: process.env.MONGODB_URI};
