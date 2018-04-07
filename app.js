@@ -2,9 +2,21 @@ const express = require('express');
 const path = require('path');
 const validUrl = require('valid-url');
 const mongoose = require('mongoose');
+const DATABASE_URI = require('./config/database').DATABASE_URI;
 
+// Run Express
 const app = express();
+
+// Public directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+// Mongoose / MongoDB
+mongoose.connect(DATABASE_URI);
+const db = mongoose.connection;
+mongoose.Promise = global.Promise;
+db.on('error', console.error.bind(console, 'connection error:'));
+
 
 app.get('/', (req, res) => {
     res.send('Home page');
