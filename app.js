@@ -66,6 +66,10 @@ app.get('/api/:shortenedUrlCode', (req, res) => {
     });
 });
 
+app.get('*', (req, res) => {
+    res.redirect('/');
+});
+
 
 
 const port = process.env.PORT || 8080;
