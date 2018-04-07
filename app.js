@@ -6,6 +6,7 @@ const {DATABASE_URI} = require('./config/database');
 const UrlModel = require('./models/url');
 const urlHelpers = require('./helpers/url-helpers');
 const async = require('async');
+const {DOMAIN, APIHOME} = require('./config/domain');
 
 
 // Mongoose / MongoDB
@@ -13,9 +14,6 @@ mongoose.connect(DATABASE_URI);
 const db = mongoose.connection;
 mongoose.Promise = global.Promise;
 db.on('error', console.error.bind(console, 'connection error:'));
-
-const DOMAIN = 'http://localhost:8080/';
-const APIHOME = 'api/';
 
 
 // Run Express
@@ -47,7 +45,7 @@ app.get('/api/new/:url(*)', (req, res) => {
             if (err) {
                 return res.send(err);
             }
-            return res.json(urlHelpers.parseUrlData(DOMAIN, data, APIHOME));
+            return res.json(urlHelpers.parseUrlData(DOMAIN, result, APIHOME));
         });
     } else {
         return res.json({error: "Wrong URL format. Please make sure you have a valid protocol and real site."});
