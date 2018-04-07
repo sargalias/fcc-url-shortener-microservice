@@ -1,16 +1,12 @@
 const mongoose = require('mongoose');
-const {autoIncrement} = require('../config/database');
+const shortid = require('shortid');
 
 
 const urlSchema = new mongoose.Schema({
-    originalUrl: {type: String, required: true},
+    originalUrl: {type: String, required: true, unique: true},
+    shortenedUrl: {type: String, default: shortid.generate, unique: true}
 });
 
-urlSchema.plugin(autoIncrement.plugin, {
-    model: 'URL',
-    field: 'shortened',
-    startAt: 101
-});
 
 const UrlModel = mongoose.model('URL', urlSchema);
 
