@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sargalias/fcc-url-shortener-microservice#readme",
   "dependencies": {
+    "async": "^2.6.0",
     "express": "^4.16.3",
     "mongoose": "^5.0.13",
     "mongoose-auto-increment": "^5.0.1",
